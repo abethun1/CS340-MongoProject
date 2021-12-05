@@ -109,9 +109,28 @@ def create(self, data):
             print(self.database.animals.find_one({key : value}))
         else:
             print("Value doesn't exist")
-            raise Exception("This is not a proper Key : Value Pair")```
+            raise Exception("This is not a proper Key : Value Pair")
+```
 
+### Update Method
+```python
+    def update(self, animal_id, key, changed_value):
+        if self.database.animals.find_one({"animal_id" : animal_id}) is not None:
+            self.database.animals.update_one({"animal_id" : animal_id}, {"$set":{key:changed_value}})
+            print(self.database.animals.find_one({key : changed_value}))
+        else:
+            print("Value doesn't exist")
+            raise Exception("Not a valid animal_id")
+```
 
-
+### Delete Method
+```python
+    def remove(self, animal_id):
+        if self.database.animals.find_one({"animal_id" : animal_id}) is not None:
+            self.database.animals.delete_one({"animal_id" : animal_id});
+        else:
+            print("Value doesn't exist")
+            raise Exception("Not a valid animal_id")
+```
 
 
